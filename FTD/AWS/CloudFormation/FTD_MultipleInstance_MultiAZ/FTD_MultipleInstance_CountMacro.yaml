@@ -170,7 +170,7 @@ Parameters:
   NumberOfFtd:
     Description: Number of FTDv instances needed
     Type: String
-    Default: 3
+    Default: 2
     # Change the default count based on the number of FTDv instances here or in the Cloudformation UI when deploying
     AllowedValues:
       - 2
@@ -191,10 +191,11 @@ Parameters:
   FMCVersion:
     Description: Cisco FMCv Version
     Type: String
-    Default: fmcv-6.7.0-65
+    Default: fmcv-7.1.0-92
     AllowedValues:
       - fmcv-6.6.1-91
       - fmcv-6.7.0-65
+      - fmcv-7.1.0-92
   FTDLicType:
     Description: Cisco FTDv License Type
     Type: String
@@ -211,7 +212,7 @@ Parameters:
   FTDInstanceType:
     Description: Cisco FTDv EC2 instance type
     Type: String
-    Default: c5.xlarge
+    Default: c5.4xlarge
     AllowedValues:
       - c5.xlarge
       - c5.2xlarge
@@ -716,7 +717,7 @@ Resources:
     Type: 'AWS::EC2::EIP'
     Properties:
       Domain: !Ref vpc
-    Count: 3
+    Count: 2
     # Change the count based on the number of FTDv instances.
   eipFMCMgmt:
     Type: 'AWS::EC2::EIP'
@@ -729,7 +730,7 @@ Resources:
         - eipFTDMgmt%d
         - AllocationId
       NetworkInterfaceId: !Ref eniFTDMgmt%d
-    Count: 3
+    Count: 2
     # Change the count based on the number of FTDv instances.
   eipaFMCMgmt:
     Type: 'AWS::EC2::EIPAssociation'
@@ -753,7 +754,7 @@ Resources:
       GroupSet:
         - !Ref sgManagementInterface
       SourceDestCheck: 'false'
-    Count: 3
+    Count: 2
     # Change the count based on the number of FTDv instances.
   eniFMCMgmt:
     Type: 'AWS::EC2::NetworkInterface'
@@ -781,7 +782,7 @@ Resources:
       GroupSet:
         - !Ref sgManagementInterface
       SourceDestCheck: 'false'
-    Count: 3
+    Count: 2
     # Change the count based on the number of FTDv instances.
   eniFTDInside:
     Type: 'AWS::EC2::NetworkInterface'
@@ -798,7 +799,7 @@ Resources:
       GroupSet:
         - !Ref SecurityGroupAll
       SourceDestCheck: 'false'
-    Count: 3
+    Count: 2
     # Change the count based on the number of FTDv instances.
   eniFTDOutside:
     Type: 'AWS::EC2::NetworkInterface'
@@ -815,7 +816,7 @@ Resources:
       GroupSet:
         - !Ref SecurityGroupAll
       SourceDestCheck: 'false'
-    Count: 3
+    Count: 2
     # Change the count based on the number of FTDv instances.
 
 
@@ -865,7 +866,7 @@ Resources:
         'Fn::Join':
           - ''
           - []
-    Count: 3
+    Count: 2
     # Change the count based on the number of FTDv instances.
   CiscoFMC:
     Condition: DeployFMC
