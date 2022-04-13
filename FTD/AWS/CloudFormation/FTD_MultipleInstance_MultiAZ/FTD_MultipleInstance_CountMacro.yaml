@@ -191,7 +191,7 @@ Parameters:
   FMCVersion:
     Description: Cisco FMCv Version
     Type: String
-    Default: fmcv-7.1.0-92
+    Default: fmcv-6.7.0-65
     AllowedValues:
       - fmcv-6.6.1-91
       - fmcv-6.7.0-65
